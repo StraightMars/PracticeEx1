@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,45 +11,23 @@ namespace Practice1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите количество элементов N: ");
-            bool ok;
-            int n;
-            do
+            int N;
+            N = Int32.Parse(Console.ReadLine());
+            long[] input = new long[N];
+            for (int i = 0; i < input.Length; i++)
             {
-                ok = Int32.TryParse(Console.ReadLine(), out n);
-                if (!ok)
-                    Console.WriteLine("Ошибка ввода. Введите натуральное число.");
-                if (n <= 0)
-                {
-                    ok = false;
-                    Console.WriteLine("Ошибка ввода. Введите натуральное число");
-                }
-            } while (!ok);
-            int[] arr = new int[n];
-            Console.WriteLine("Вводите элементы массива через Enter:");
-            ok = false;
-            int el;
-            for (int i = 0; i < n; i++)
-            {
-                do
-                {
-                    ok = Int32.TryParse(Console.ReadLine(), out el);
-                    if (!ok)
-                        Console.WriteLine("Ошибка ввода. Введите целое число.");
-                } while (!ok);
-                arr[i] = el;
+                input[i] = Int64.Parse(Console.ReadLine());
             }
-            for (int i = 0; i < n; i++)
+            Array.Sort(input);
+            long value = 1;
+            for (int i = 0; i < input.Length; i++)
             {
-                for (int j = 0; j < n; j++)
-                {
-                    if (arr[i] == arr[j])
-                    {
-                        arr[i] = arr[j];
-                        arr.Concat()
-                    }
-                }
+                if (value >= input[i])
+                    value += input[i];
+                else
+                    break;
             }
+            Console.WriteLine(value);
         }
     }
 }
